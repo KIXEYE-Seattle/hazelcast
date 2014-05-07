@@ -584,14 +584,12 @@
 
     <distributionManagement>
         <repository>
-            <id>release-repository</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+            <id>releases</id>
+            <url>http://nexus.kixsea.com/content/repositories/releases/</url>
         </repository>
         <snapshotRepository>
-            <id>snapshot-repository</id>
-            <name>Maven2 Snapshot Repository</name>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-            <uniqueVersion>false</uniqueVersion>
+            <id>snapshots</id>
+            <url>http://nexus.kixsea.com/content/repositories/snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 
