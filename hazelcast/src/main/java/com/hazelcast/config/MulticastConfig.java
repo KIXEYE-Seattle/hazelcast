@@ -16,6 +16,7 @@
 
 package com.hazelcast.config;
 
+import com.hazelcast.cluster.MulticastJoinerFactory;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -50,6 +51,26 @@ public class MulticastConfig {
     private int multicastTimeToLive = DEFAULT_MULTICAST_TTL;
 
     private final Set<String> trustedInterfaces = new HashSet<String>();
+
+    private String joinerFactoryClass = MulticastJoinerFactory.class.getName();
+
+    /**
+     * Getter for joinerFactoryClass
+     * @return
+     */
+    public String getJoinerFactoryClass() {
+        return joinerFactoryClass;
+    }
+
+    /**
+     * Setter for joinerFactoryClass
+     * @param joinerFactoryClass
+     * @return
+     */
+    public MulticastConfig setJoinerFactoryClass(String joinerFactoryClass) {
+        this.joinerFactoryClass = hasText(joinerFactoryClass, "joinerFactoryClass");
+        return this;
+    }
 
     /**
      * Check if the multicast discovery mechanism has been enabled.

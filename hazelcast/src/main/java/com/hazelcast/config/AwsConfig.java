@@ -48,6 +48,25 @@ public class AwsConfig {
     private String tagValue;
     private String hostHeader = "ec2.amazonaws.com";
     private int connectionTimeoutSeconds = 5;
+    private String joinerFactoryClass = "com.hazelcast.cluster.AWSJoinerFactory";
+
+    /**
+     * Getter for joinerFactoryClass
+     * @return
+     */
+    public String getJoinerFactoryClass() {
+        return joinerFactoryClass;
+    }
+
+    /**
+     * Setter for joinerFactoryClass
+     * @param joinerFactoryClass
+     * @return
+     */
+    public AwsConfig setJoinerFactoryClass(String joinerFactoryClass) {
+        this.joinerFactoryClass = hasText(joinerFactoryClass, "joinerFactoryClass");
+        return this;
+    }
 
     /**
      * Gets the access key to access AWS. Returns null if no access key is configured.

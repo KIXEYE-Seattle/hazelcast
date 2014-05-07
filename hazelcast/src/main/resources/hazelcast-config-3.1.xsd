@@ -358,6 +358,7 @@
         </xs:sequence>
         <xs:attribute name="enabled" type="xs:boolean" use="optional" default="false"/>
         <xs:attribute name="connection-timeout-seconds" type="xs:int" use="optional" default="5"/>
+        <xs:attribute name="joiner-factory-class" type="xs:string" use="optional"/>
     </xs:complexType>
     <xs:complexType name="port">
         <xs:simpleContent>
@@ -387,6 +388,7 @@
             </xs:element>
         </xs:sequence>
         <xs:attribute name="enabled" type="xs:boolean" use="optional" default="true"/>
+        <xs:attribute name="joiner-factory-class" type="xs:string" use="optional"/>
     </xs:complexType>
     <xs:complexType name="aws">
         <xs:sequence>
@@ -400,6 +402,7 @@
         </xs:sequence>
         <xs:attribute name="enabled" type="xs:boolean" use="optional" default="true"/>
         <xs:attribute name="connection-timeout-seconds" type="xs:int" use="optional" default="5"/>
+        <xs:attribute name="joiner-factory-class" type="xs:string" use="optional"/>
     </xs:complexType>
     <xs:complexType name="join">
         <xs:sequence>

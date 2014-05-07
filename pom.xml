@@ -23,7 +23,7 @@
     <groupId>com.hazelcast</groupId>
     <artifactId>hazelcast-root</artifactId>
     <packaging>pom</packaging>
-    <version>3.1.7</version>
+    <version>3.1.7-kixeye-p1-SNAPSHOT</version>
     <name>Hazelcast Root</name>
     <description>Hazelcast In-Memory DataGrid</description>
     <url>http://www.hazelcast.com/</url>
@@ -438,7 +438,9 @@
                                 -Dhazelcast.logging.type=none
                                 -Dhazelcast.test.use.network=true
                             </argLine>
-                            <groups>com.hazelcast.test.annotation.ParallelTest,com.hazelcast.test.annotation.SerialTest</groups>
+                            <groups>
+                                com.hazelcast.test.annotation.ParallelTest,com.hazelcast.test.annotation.SerialTest
+                            </groups>
                         </configuration>
                     </plugin>
                 </plugins>
@@ -536,7 +538,7 @@
                             <executable>/usr/lib/jvm/java-1.7.0/bin/javac</executable>
                         </configuration>
                     </plugin>
-                 </plugins>
+                </plugins>
             </build>
         </profile>
 
@@ -576,7 +578,7 @@
                         </configuration>
                     </plugin>
                 </plugins>
-             </build>
+            </build>
         </profile>
     </profiles>
 

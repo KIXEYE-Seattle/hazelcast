@@ -540,27 +540,34 @@ public class Node {
     }
 
     Joiner createJoiner() {
-        JoinConfig join = config.getNetworkConfig().getJoin();
-        if (join.getMulticastConfig().isEnabled() && multicastService != null) {
-            logger.info("Creating MulticastJoiner");
-            systemLogService.logJoin("Creating MulticastJoiner");
-            return new MulticastJoiner(this);
-        } else if (join.getTcpIpConfig().isEnabled()) {
-            logger.info("Creating TcpIpJoiner");
-            systemLogService.logJoin("Creating TcpIpJoiner");
-            return new TcpIpJoiner(this);
-        } else if (join.getAwsConfig().isEnabled()) {
-            Class clazz;
+        String joinerFactoryClass = getJoinerFactoryClass();
+
+        if(joinerFactoryClass != null){
             try {
-                logger.info("Creating AWSJoiner");
-                clazz = Class.forName("com.hazelcast.cluster.TcpIpJoinerOverAWS");
-                Constructor constructor = clazz.getConstructor(Node.class);
-                systemLogService.logJoin("Creating AWSJoiner");
-                return (Joiner) constructor.newInstance(this);
+                logger.info("Creating Joiner from JoinerFactory " + joinerFactoryClass);
+                Class clazz = Class.forName(joinerFactoryClass);
+                Constructor<JoinerFactory> constructor = clazz.getConstructor();
+                systemLogService.logJoin("Creating Joiner from JoinerFactory " + joinerFactoryClass);
+                return constructor.newInstance().createJoiner(this, config.getNetworkConfig().getJoin());
             } catch (Exception e) {
                 logger.severe("Error while creating AWSJoiner!", e);
             }
         }
+
+        return null;
+    }
+
+    private String getJoinerFactoryClass(){
+        JoinConfig join = config.getNetworkConfig().getJoin();
+
+        if (join.getMulticastConfig().isEnabled() && multicastService != null) {
+            return join.getMulticastConfig().getJoinerFactoryClass();
+        } else if (join.getTcpIpConfig().isEnabled()) {
+            return join.getTcpIpConfig().getJoinerFactoryClass();
+        } else if (join.getAwsConfig().isEnabled()) {
+            return join.getAwsConfig().getJoinerFactoryClass();
+        }
+
         return null;
     }
 

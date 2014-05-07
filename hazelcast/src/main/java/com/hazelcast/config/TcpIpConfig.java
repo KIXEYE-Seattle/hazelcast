@@ -16,6 +16,7 @@
 
 package com.hazelcast.config;
 
+import com.hazelcast.cluster.TcpIpJoinerFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -39,6 +40,26 @@ public class TcpIpConfig {
     private List<String> members = new ArrayList<String>();
 
     private String requiredMember = null;
+
+    private String joinerFactoryClass = TcpIpJoinerFactory.class.getName();
+
+    /**
+     * Getter for joinerFactoryClass
+     * @return
+     */
+    public String getJoinerFactoryClass() {
+        return joinerFactoryClass;
+    }
+
+    /**
+     * Setter for joinerFactoryClass
+     * @param joinerFactoryClass
+     * @return
+     */
+    public TcpIpConfig setJoinerFactoryClass(String joinerFactoryClass) {
+        this.joinerFactoryClass = hasText(joinerFactoryClass, "joinerFactoryClass");
+        return this;
+    }
 
     /**
      * Returns the connection timeout.

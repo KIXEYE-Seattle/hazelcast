@@ -548,6 +548,8 @@ public class XmlConfigBuilder extends AbstractXmlConfigHelper implements ConfigB
                 awsConfig.setEnabled(checkTrue(value));
             } else if (att.getNodeName().equals("connection-timeout-seconds")) {
                 awsConfig.setConnectionTimeoutSeconds(getIntegerValue("connection-timeout-seconds", value, 5));
+            } else if ("joiner-factory-class".equalsIgnoreCase(att.getNodeName())){
+                awsConfig.setJoinerFactoryClass(value);
             }
         }
         for (Node n : new IterableNodeList(node.getChildNodes())) {
@@ -579,6 +581,8 @@ public class XmlConfigBuilder extends AbstractXmlConfigHelper implements ConfigB
             final String value = getTextContent(att).trim();
             if ("enabled".equalsIgnoreCase(att.getNodeName())) {
                 multicastConfig.setEnabled(checkTrue(value));
+            } else if ("joiner-factory-class".equalsIgnoreCase(att.getNodeName())){
+                multicastConfig.setJoinerFactoryClass(value);
             }
         }
         for (Node n : new IterableNodeList(node.getChildNodes())) {
@@ -616,6 +620,8 @@ public class XmlConfigBuilder extends AbstractXmlConfigHelper implements ConfigB
                 tcpIpConfig.setEnabled(checkTrue(value));
             } else if (att.getNodeName().equals("connection-timeout-seconds")) {
                 tcpIpConfig.setConnectionTimeoutSeconds(getIntegerValue("connection-timeout-seconds", value, 5));
+            } else if ("joiner-factory-class".equalsIgnoreCase(att.getNodeName())){
+                tcpIpConfig.setJoinerFactoryClass(value);
             }
         }
         final NodeList nodelist = node.getChildNodes();
